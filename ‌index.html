@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stride&Grow · Bilan Phase 1 & Préparation Phase 2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+  :root {
+    --green:  #1c3a2e;
+    --sand:   #c9a26d;
+    --brown:  #897056;
+    --navy:   #1a2f4a;
+    --cream:  #f5f0e8;
+    --light:  #faf8f4;
+    --rule:   1px solid rgba(28,58,46,0.14);
+    --field-bg: #ffffff;
+    --field-border: rgba(28,58,46,0.2);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--light);
+    color: var(--green);
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--green);
+    padding: 36px 48px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--sand);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .header-sub {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(245,240,232,0.55);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .header-right { text-align: right; }
+  .header-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    color: var(--sand);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .header-date {
+    font-size: 10px;
+    color: rgba(245,240,232,0.45);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── INTRO BAND ── */
+  .intro-band {
+    background: var(--cream);
+    border-bottom: 3px solid var(--sand);
+    padding: 20px 48px;
+  }
+  .intro-band p {
+    font-size: 12.5px;
+    color: var(--brown);
+    line-height: 1.7;
+    max-width: 720px;
+  }
+  .intro-band p strong { color: var(--green); font-weight: 600; }
+
+  /* ── MAIN ── */
+  .main { padding: 40px 48px 48px; max-width: 860px; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 44px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--sand);
+  }
+  .section-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--sand);
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--green);
+    text-transform: uppercase;
+  }
+  .section-intro {
+    font-size: 12px;
+    color: var(--brown);
+    font-style: italic;
+    margin-bottom: 18px;
+    line-height: 1.6;
+    padding-left: 50px;
+  }
+  .section-intro strong { font-style: normal; color: var(--green); font-weight: 600; }
+
+  /* ── QUESTION ── */
+  .question { margin-bottom: 22px; }
+  .question-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .question-hint {
+    font-size: 11px;
+    color: var(--brown);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  /* ── TEXTAREA ── */
+  textarea {
+    width: 100%;
+    background: var(--field-bg);
+    border: 1px solid var(--field-border);
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12.5px;
+    color: var(--green);
+    resize: vertical;
+    min-height: 70px;
+    line-height: 1.6;
+    transition: border-color 0.15s;
+  }
+  textarea:focus { outline: none; border-color: var(--sand); }
+  textarea.short { min-height: 50px; }
+  textarea.tall  { min-height: 100px; }
+
+  /* ── RADIO / CHECKBOX GROUP ── */
+  .radio-group, .check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+  .radio-group.inline, .check-group.inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
+  .radio-item, .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    cursor: pointer;
+  }
+  .radio-item input[type="radio"],
+  .check-item input[type="checkbox"] {
+    margin-top: 2px;
+    width: 15px;
+    height: 15px;
+    accent-color: var(--green);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .radio-item label,
+  .check-item label {
+    font-size: 12.5px;
+    color: var(--green);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  /* ── SCALE ROW ── */
+  .scale-wrap { margin-bottom: 10px; }
+  .scale-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--brown);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .scale-radio-row {
+    display: flex;
+    gap: 0;
+  }
+  .scale-radio-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .scale-radio-item input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--green);
+    cursor: pointer;
+  }
+  .scale-radio-item label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    color: var(--brown);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: var(--rule); margin: 8px 0 18px; }
+
+  /* ── RECALL BOX ── */
+  .recall-box {
+    background: var(--cream);
+    border-left: 4px solid var(--sand);
+    border-radius: 0 3px 3px 0;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+  }
+  .recall-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 5px;
+  }
+  .recall-text {
+    font-size: 12px;
+    color: var(--green);
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .recall-text strong { font-style: normal; font-weight: 600; }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: rgba(26,47,74,0.05);
+    border: 1px solid rgba(26,47,74,0.12);
+    border-radius: 3px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: var(--navy);
+    line-height: 1.65;
+  }
+  .callout strong { font-weight: 600; }
+
+  /* ── SUBMIT BAND ── */
+  .submit-band {
+    background: var(--green);
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  .submit-text {
+    font-size: 12px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+    max-width: 480px;
+  }
+  .submit-text strong { color: var(--cream); font-weight: 600; }
+  .submit-btn {
+    background: var(--sand);
+    color: var(--green);
+    border: none;
+    padding: 13px 32px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .submit-btn:hover { background: #d4b07c; }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: var(--rule);
+    padding: 16px 48px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: rgba(28,58,46,0.38);
+    letter-spacing: 0.5px;
+  }
+  .footer a { color: var(--sand); text-decoration: none; }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; font-size: 11px; }
+    .submit-band { display: none; }
+    .main { padding: 20px 24px; }
+    .header { padding: 20px 24px; }
+    textarea { border: 1px solid #bbb; min-height: 40px; }
+    .scale-radio-item label { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<form id="bilanForm">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="header-brand">Stride&Grow · Courir et Comprendre</div>
+    <div class="header-title">Bilan Phase 1</div>
+    <div class="header-sub">Préparation Phase 2 · Août 2026</div>
+  </div>
+  <div class="header-right">
+    <span class="header-name">Phase 1 · 2026</span>
+    <div class="header-date">1 juillet – 9 août 2026</div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-band">
+  <p>
+    Six semaines. Voilà ce que tu viens de traverser — une reprise structurée, deux séances de renforcement par semaine, des zones de FC à respecter, et une discipline que peu de coureurs s'imposent. Avant de construire la Phase 2 ensemble, j'ai besoin de ton retour sur ce qui s'est passé. <strong>Tes réponses conditionnent directement ce que je vais programmer pour toi.</strong> Compte 10 à 15 minutes pour répondre honnêtement — il n'y a pas de bonne ou mauvaise réponse.
+  </p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ══ SECTION 1 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div class="section-title">Douleurs & Inconforts</div>
+    </div>
+    <p class="section-intro">
+      La principale difficulté que tu m'as indiquée dans le formulaire de pré-appel était une <strong>douleur sciatique / hanche</strong> qui t'empêchait de courir longtemps ou intensément. Cette section me permet de mesurer l'évolution réelle sur 6 semaines.
+    </p>
+
+    <div class="question">
+      <div class="question-label">Douleur sciatique — niveau actuel (0 = absente, 10 = invalidante)</div>
+      <div class="scale-wrap">
+        <div class="scale-label-row">
+          <span>0 — Absente</span>
+          <span>10 — Invalidante</span>
+        </div>
+        <div class="scale-radio-row">
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s0" value="0"><label for="s0">0</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s1" value="1"><label for="s1">1</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s2" value="2"><label for="s2">2</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s3" value="3"><label for="s3">3</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s4" value="4"><label for="s4">4</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s5" value="5"><label for="s5">5</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s6" value="6"><label for="s6">6</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s7" value="7"><label for="s7">7</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s8" value="8"><label for="s8">8</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s9" value="9"><label for="s9">9</label></div>
+          <div class="scale-radio-item"><input type="radio" name="sciat" id="s10" value="10"><label for="s10">10</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Douleur lombaire — niveau actuel (0 = absente, 10 = invalidante)</div>
+      <div class="scale-wrap">
+        <div class="scale-label-row">
+          <span>0 — Absente</span>
+          <span>10 — Invalidante</span>
+        </div>
+        <div class="scale-radio-row">
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l0" value="0"><label for="l0">0</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l1" value="1"><label for="l1">1</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l2" value="2"><label for="l2">2</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l3" value="3"><label for="l3">3</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l4" value="4"><label for="l4">4</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l5" value="5"><label for="l5">5</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l6" value="6"><label for="l6">6</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l7" value="7"><label for="l7">7</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l8" value="8"><label for="l8">8</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l9" value="9"><label for="l9">9</label></div>
+          <div class="scale-radio-item"><input type="radio" name="lombo" id="l10" value="10"><label for="l10">10</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Comment ces douleurs ont-elles évolué entre la Semaine 1 et maintenant ?</div>
+      <div class="question-hint">Pense à comparer tes sensations en début de programme avec aujourd'hui — à la course, au renforcement, et dans le quotidien.</div>
+      <textarea name="evol_douleur" class="tall" placeholder="Ex : La sciatique était présente les 2 premières semaines puis a disparu. La lombalgie a diminué progressivement…"></textarea>
+    </div>
+
+    <hr class="divider">
+
+    <div class="question">
+      <div class="question-label">As-tu ressenti une douleur à l'ischio-jambier droit pendant la Phase 1 ?</div>
+      <div class="question-hint">À la course, au renforcement (SL-RDL, split squat), ou dans d'autres activités.</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="ischio" value="oui"> <span>Oui</span></label>
+        <label class="radio-item"><input type="radio" name="ischio" value="legere"> <span>Légère gêne seulement</span></label>
+        <label class="radio-item"><input type="radio" name="ischio" value="non"> <span>Non</span></label>
+      </div>
+      <textarea name="ischio_detail" class="short" placeholder="Si oui ou gêne — précise quand, dans quel exercice ou mouvement, et si ça a persisté ou disparu…"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">As-tu vécu d'autres inconforts ou douleurs notables pendant la Phase 1 ?</div>
+      <div class="question-hint">Pendant l'entraînement ou dans la vie quotidienne. Précise si c'était persistant ou si ça a disparu rapidement.</div>
+      <textarea name="autres_douleurs" placeholder="Ex : gêne genou gauche sur le long run S3, disparue après 2 jours. Ou : aucun inconfort particulier."></textarea>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div class="section-title">Renforcement</div>
+    </div>
+    <p class="section-intro">
+      Le renforcement était le pilier de la Phase 1. Tes réponses ici me permettent d'évaluer ce qui a vraiment été fait — et de calibrer correctement la progression en Phase 2.
+    </p>
+
+    <div class="question">
+      <div class="question-label">As-tu pu réaliser les deux séances de renforcement chaque semaine ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="renfo_freq" value="oui_toutes"> <span>Oui, les 6 semaines sans exception</span></label>
+        <label class="radio-item"><input type="radio" name="renfo_freq" value="plupart"> <span>La plupart des semaines</span></label>
+        <label class="radio-item"><input type="radio" name="renfo_freq" value="non"> <span>Non, plusieurs semaines manquées</span></label>
+      </div>
+      <textarea name="renfo_freq_detail" class="short" placeholder="Si des séances ont été manquées — pourquoi ? (agenda, fatigue, douleur…)"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">As-tu pu augmenter le nombre de répétitions comme prescrit au fil des semaines ?</div>
+      <div class="question-hint">S1-S2 : volumes bas → S3-S4 : augmentation → S5-S6 : volumes hauts. Est-ce que cette progression s'est faite ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="reps_prog" value="oui"> <span>Oui, sans problème</span></label>
+        <label class="radio-item"><input type="radio" name="reps_prog" value="partiel"> <span>En partie — certains exercices ont bloqué</span></label>
+        <label class="radio-item"><input type="radio" name="reps_prog" value="non"> <span>Non</span></label>
+      </div>
+      <textarea name="reps_prog_detail" class="short" placeholder="Précise si certains exercices ont bloqué la progression…"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">En S5-S6, as-tu atteint le RPE cible de 7-8 sur le bloc essentiel ?</div>
+      <div class="question-hint">RPE 7-8 = dernière répétition très difficile, tu pourrais en faire 1-2 de plus mais pas davantage.</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="rpe" value="oui"> <span>Oui</span></label>
+        <label class="radio-item"><input type="radio" name="rpe" value="partiel"> <span>Sur certains exercices seulement</span></label>
+        <label class="radio-item"><input type="radio" name="rpe" value="non"> <span>Non — les exercices restaient trop faciles</span></label>
+      </div>
+      <textarea name="rpe_detail" class="short" placeholder="Précisions si besoin…"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">As-tu pu réaliser le bloc complémentaire (P6-P9) en plus du bloc essentiel (P1-P5) ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="bloc_comp" value="toujours"> <span>Toujours — les deux blocs à chaque séance</span></label>
+        <label class="radio-item"><input type="radio" name="bloc_comp" value="parfois"> <span>Parfois</span></label>
+        <label class="radio-item"><input type="radio" name="bloc_comp" value="jamais"> <span>Rarement ou jamais — bloc essentiel uniquement</span></label>
+      </div>
+      <textarea name="bloc_comp_detail" class="short" placeholder="Si rarement — contrainte de temps, fatigue, ou autre raison ?"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Y a-t-il des exercices qui t'ont semblé particulièrement difficiles à maîtriser ?</div>
+      <div class="question-hint">Technique, équilibre, ou intensité — toute difficulté compte.</div>
+      <textarea name="exos_difficiles" placeholder="Ex : le SL-RDL reste instable sur la jambe gauche. Le dead bug est devenu facile dès S3."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">As-tu ressenti de la douleur pendant l'exécution d'un exercice spécifique ?</div>
+      <div class="radio-group inline">
+        <label class="radio-item"><input type="radio" name="doul_renfo" value="oui"> <span>Oui</span></label>
+        <label class="radio-item"><input type="radio" name="doul_renfo" value="non"> <span>Non</span></label>
+      </div>
+      <textarea name="doul_renfo_detail" class="short" placeholder="Si oui — quel exercice, quelle douleur, à quel moment du mouvement ?"></textarea>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div class="section-title">Récupération & Énergie</div>
+    </div>
+    <p class="section-intro">
+      Les deux dernières semaines représentent la charge la plus élevée de la Phase 1. Ce que tu as ressenti dans cette période est un indicateur clé de ta capacité à absorber un volume plus important en Phase 2.
+    </p>
+
+    <div class="question">
+      <div class="question-label">Comment as-tu récupéré entre les séances sur les deux dernières semaines ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="recup" value="tres_bien"> <span>Très bien — jambes fraîches d'une séance à l'autre</span></label>
+        <label class="radio-item"><input type="radio" name="recup" value="bien"> <span>Bien — légère fatigue mais ça passait</span></label>
+        <label class="radio-item"><input type="radio" name="recup" value="moyen"> <span>Moyen — jambes souvent lourdes</span></label>
+        <label class="radio-item"><input type="radio" name="recup" value="difficile"> <span>Difficile — fatigue accumulée notable</span></label>
+      </div>
+      <textarea name="recup_detail" class="short" placeholder="Y a-t-il eu des séances où tu t'es senti épuisé avant même de commencer ?"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Comment as-tu dormi sur les deux dernières semaines ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="sommeil" value="bien"> <span>Bien — sans changement notable</span></label>
+        <label class="radio-item"><input type="radio" name="sommeil" value="variable"> <span>Variable selon les nuits</span></label>
+        <label class="radio-item"><input type="radio" name="sommeil" value="perturbe"> <span>Perturbé — moins bien qu'habituellement</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Ton niveau d'énergie général dans le quotidien sur les deux dernières semaines ?</div>
+      <div class="scale-wrap">
+        <div class="scale-label-row">
+          <span>1 — Épuisé(e)</span>
+          <span>10 — Plein(e) d'énergie</span>
+        </div>
+        <div class="scale-radio-row">
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e1" value="1"><label for="e1">1</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e2" value="2"><label for="e2">2</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e3" value="3"><label for="e3">3</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e4" value="4"><label for="e4">4</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e5" value="5"><label for="e5">5</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e6" value="6"><label for="e6">6</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e7" value="7"><label for="e7">7</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e8" value="8"><label for="e8">8</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e9" value="9"><label for="e9">9</label></div>
+          <div class="scale-radio-item"><input type="radio" name="energie" id="e10" value="10"><label for="e10">10</label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <div class="section-title">Retour sur le point de départ</div>
+    </div>
+    <p class="section-intro">
+      Avant notre premier appel, tu avais répondu à quelques questions sur ta situation. Je les remets ici pour que tu puisses mesurer le chemin parcouru.
+    </p>
+
+    <div class="recall-box">
+      <div class="recall-label">Ce que tu m'avais indiqué en juin</div>
+      <div class="recall-text">
+        <strong>Principale difficulté :</strong> « Les entraînements intenses sont trop traumatisants. Actuellement douleur hanche/sciatique qui m'empêche les courses longues ou intenses. »<br><br>
+        <strong>Ce que tu avais essayé :</strong> « Je cours peu et je remplace la course par un peu de renforcement, avec des exercices un peu pris au hasard. »<br><br>
+        <strong>Ce qui devait changer en 3 mois :</strong> « Limitation des blessures. »
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Est-ce que la Phase 1 a répondu à ce que tu attendais de cet accompagnement ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="reponse_attentes" value="oui"> <span>Oui, clairement</span></label>
+        <label class="radio-item"><input type="radio" name="reponse_attentes" value="partiel"> <span>En partie</span></label>
+        <label class="radio-item"><input type="radio" name="reponse_attentes" value="trop_tot"> <span>Trop tôt pour le dire</span></label>
+        <label class="radio-item"><input type="radio" name="reponse_attentes" value="non"> <span>Pas vraiment</span></label>
+      </div>
+      <textarea name="reponse_attentes_detail" style="margin-top:8px;" placeholder="Dis-moi ce qui a changé concrètement — à la course, au quotidien, dans ta façon de te sentir dans ton corps."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Ton objectif de semi-marathon en 1h45 — est-ce que tu te sens plus proche de le réaliser ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="semi" value="oui"> <span>Oui, plus confiant(e)</span></label>
+        <label class="radio-item"><input type="radio" name="semi" value="pareil"> <span>Ni plus ni moins qu'avant</span></label>
+        <label class="radio-item"><input type="radio" name="semi" value="nsp"> <span>Je ne sais pas encore</span></label>
+      </div>
+      <textarea name="semi_detail" class="short" style="margin-top:8px;" placeholder="La date de l'objectif a-t-elle évolué ? As-tu une course en tête ?"></textarea>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <div class="section-title">Ressenti général</div>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Qu'est-ce qui a bien fonctionné pour toi sur ces 6 semaines ?</div>
+      <div class="question-hint">Séances, organisation, sensations, progression — tout ce qui t'a semblé positif.</div>
+      <textarea name="bien_fonctionne" class="tall" placeholder=""></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Qu'est-ce qui a été difficile ou frustrant ?</div>
+      <div class="question-hint">Contraintes, exercices, zones FC, rythme — sois direct(e).</div>
+      <textarea name="difficile" class="tall" placeholder=""></textarea>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Y a-t-il autre chose que tu voudrais me dire avant qu'on construise la Phase 2 ?</div>
+      <textarea name="champ_libre" placeholder="Champ libre."></textarea>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">6</div>
+      <div class="section-title">Organisation Phase 2</div>
+    </div>
+    <p class="section-intro">
+      La Phase 2 va introduire progressivement des intensités plus élevées et un volume de course accru. Pour que ça fonctionne, j'ai besoin de savoir ce que tu peux réellement mettre en place chaque semaine.
+    </p>
+
+    <div class="question">
+      <div class="question-label">La structure actuelle — 2 courses + 2 séances de renforcement par semaine — te convient-elle ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="struct" value="oui"> <span>Oui, ça me convient bien</span></label>
+        <label class="radio-item"><input type="radio" name="struct" value="charge"> <span>C'était un peu chargé</span></label>
+        <label class="radio-item"><input type="radio" name="struct" value="light"> <span>Je pourrais en faire plus</span></label>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Pourquoi une 3ème sortie ferait une vraie différence.</strong> En Phase 2, nous allons introduire des séances à intensité plus élevée — tempo, puis des blocs au seuil. Pour que ton corps absorbe bien ces efforts sans risque, il faut une base de volume hebdomadaire solide. Passer de 2 à 3 sorties par semaine élargit cette base et rend la transition vers les intensités plus sûre et plus efficace. La 3ème sortie serait courte (8-10 km, facile) — ce n'est pas un effort supplémentaire, c'est un volume de soutien.
+    </div>
+
+    <div class="question">
+      <div class="question-label">Serais-tu ouvert(e) à ajouter une 3ème sortie hebdomadaire en Phase 2 ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="trois_runs" value="oui"> <span>Oui, sans problème</span></label>
+        <label class="radio-item"><input type="radio" name="trois_runs" value="peut_etre"> <span>Peut-être — à voir selon les semaines</span></label>
+        <label class="radio-item"><input type="radio" name="trois_runs" value="non"> <span>Non, 4 séances restent mon maximum</span></label>
+      </div>
+      <textarea name="trois_runs_detail" class="short" style="margin-top:8px;" placeholder="Si tu as des contraintes spécifiques à certains jours de la semaine, précise-les ici."></textarea>
+    </div>
+
+    <div class="recall-box">
+      <div class="recall-label">Ce que tu m'avais indiqué en juin</div>
+      <div class="recall-text">
+        <strong>Disponibilité :</strong> 4 séances par semaine · <strong>Contraintes :</strong> enfant à poser certains matins — soirs complètement bloqués par la famille.
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-label">Ces contraintes d'agenda sont-elles toujours les mêmes ?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="agenda" value="oui"> <span>Oui, rien n'a changé</span></label>
+        <label class="radio-item"><input type="radio" name="agenda" value="mieux"> <span>Ça s'est allégé</span></label>
+        <label class="radio-item"><input type="radio" name="agenda" value="pire"> <span>C'est plus compliqué qu'avant</span></label>
+      </div>
+      <textarea name="agenda_detail" class="short" style="margin-top:8px;" placeholder="Si quelque chose a changé — rentrée scolaire, changement de rythme de travail, autre…"></textarea>
+    </div>
+  </div>
+
+</div><!-- end .main -->
+
+<!-- SUBMIT -->
+<div class="submit-band">
+  <div class="submit-text">
+    <strong>Merci pour ce retour.</strong> Dès réception de tes réponses, je construis le plan Phase 2. Compte 3 à 5 jours. Si quelque chose est urgent ou si tu as une question entre-temps, tu sais où me trouver.
+  </div>
+  <button type="button" class="submit-btn" onclick="handleSubmit()">Envoyer mes réponses →</button>
+</div>
+
+</form>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>Stride&Grow · <a href="http://www.strideandgrow.com">www.strideandgrow.com</a></div>
+  <div>Bilan Phase 1 · Août 2026</div>
+  <div>BPJEPS APT · Carte Pro jusqu'en 2031</div>
+</div>
+
+<script>
+function getRadioValue(name) {
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? el.value : '(non renseigné)';
+}
+function getTextValue(name) {
+  const el = document.querySelector(`textarea[name="${name}"]`);
+  return el && el.value.trim() ? el.value.trim() : '—';
+}
+
+function handleSubmit() {
+  const lines = [];
+
+  lines.push('BILAN PHASE 1 — CORENTIN');
+  lines.push('Stride&Grow · Août 2026');
+  lines.push('');
+
+  lines.push('══ SECTION 1 — DOULEURS & INCONFORTS ══');
+  lines.push('Douleur sciatique (0-10) : ' + getRadioValue('sciat'));
+  lines.push('Douleur lombaire (0-10) : ' + getRadioValue('lombo'));
+  lines.push('Évolution douleurs S1→S6 :');
+  lines.push(getTextValue('evol_douleur'));
+  lines.push('Ischio-jambier droit : ' + getRadioValue('ischio'));
+  lines.push('Détail ischio :');
+  lines.push(getTextValue('ischio_detail'));
+  lines.push('Autres inconforts :');
+  lines.push(getTextValue('autres_douleurs'));
+  lines.push('');
+
+  lines.push('══ SECTION 2 — RENFORCEMENT ══');
+  lines.push('Fréquence séances : ' + getRadioValue('renfo_freq'));
+  lines.push('Détail :');
+  lines.push(getTextValue('renfo_freq_detail'));
+  lines.push('Progression répétitions : ' + getRadioValue('reps_prog'));
+  lines.push('Détail :');
+  lines.push(getTextValue('reps_prog_detail'));
+  lines.push('RPE 7-8 atteint en S5-S6 : ' + getRadioValue('rpe'));
+  lines.push('Détail :');
+  lines.push(getTextValue('rpe_detail'));
+  lines.push('Bloc complémentaire : ' + getRadioValue('bloc_comp'));
+  lines.push('Détail :');
+  lines.push(getTextValue('bloc_comp_detail'));
+  lines.push('Exercices difficiles :');
+  lines.push(getTextValue('exos_difficiles'));
+  lines.push('Douleur pendant exercice : ' + getRadioValue('doul_renfo'));
+  lines.push('Détail :');
+  lines.push(getTextValue('doul_renfo_detail'));
+  lines.push('');
+
+  lines.push('══ SECTION 3 — RÉCUPÉRATION & ÉNERGIE ══');
+  lines.push('Récupération inter-séances : ' + getRadioValue('recup'));
+  lines.push('Détail :');
+  lines.push(getTextValue('recup_detail'));
+  lines.push('Sommeil : ' + getRadioValue('sommeil'));
+  lines.push('Énergie générale (1-10) : ' + getRadioValue('energie'));
+  lines.push('');
+
+  lines.push('══ SECTION 4 — RETOUR SUR LE POINT DE DÉPART ══');
+  lines.push('Phase 1 a répondu aux attentes : ' + getRadioValue('reponse_attentes'));
+  lines.push('Détail :');
+  lines.push(getTextValue('reponse_attentes_detail'));
+  lines.push('Semi-marathon — sentiment de progression : ' + getRadioValue('semi'));
+  lines.push('Détail :');
+  lines.push(getTextValue('semi_detail'));
+  lines.push('');
+
+  lines.push('══ SECTION 5 — RESSENTI GÉNÉRAL ══');
+  lines.push('Ce qui a bien fonctionné :');
+  lines.push(getTextValue('bien_fonctionne'));
+  lines.push('Ce qui a été difficile :');
+  lines.push(getTextValue('difficile'));
+  lines.push('Champ libre :');
+  lines.push(getTextValue('champ_libre'));
+  lines.push('');
+
+  lines.push('══ SECTION 6 — ORGANISATION PHASE 2 ══');
+  lines.push('Structure actuelle : ' + getRadioValue('struct'));
+  lines.push('3ème sortie : ' + getRadioValue('trois_runs'));
+  lines.push('Détail :');
+  lines.push(getTextValue('trois_runs_detail'));
+  lines.push('Contraintes agenda : ' + getRadioValue('agenda'));
+  lines.push('Détail :');
+  lines.push(getTextValue('agenda_detail'));
+
+  const subject = encodeURIComponent('Bilan Phase 1');
+  const body = encodeURIComponent(lines.join('\n'));
+  window.location.href = `mailto:strideandgrow33@gmail.com?subject=${subject}&body=${body}`;
+}
+</script>
+</body>
+</html>
